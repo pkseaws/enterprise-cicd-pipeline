@@ -1,0 +1,13 @@
+name: Deploy Java
+description: Deploy Java app
+inputs:
+  env:
+    required: true
+secrets:
+  deploy_token:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: echo "Deploying Java app to ${{ inputs.env }} with token ${{ secrets.deploy_token }}"
+      shell: bash

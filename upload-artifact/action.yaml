@@ -1,0 +1,20 @@
+name: Upload Build Artifact
+description: Uploads artifact with metadata
+inputs:
+  environment:
+    required: true
+  language:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        VERSION=$(date +%Y%m%d%H%M)
+        ARTIFACT_NAME=${{ inputs.language }}-${VERSION}-${{ inputs.environment }}.tar.gz
+        tar -czf $ARTIFACT_NAME .
+        echo "Uploading $ARTIFACT_NAME"
+      shell: bash
+    - uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.language }}-build-${{ inputs.environment }}
+        path: ${{ github.workspace }}/*.tar.gz
