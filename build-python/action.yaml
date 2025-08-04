@@ -1,0 +1,10 @@
+name: Build Python App
+description: Build Python app
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        cd python
+        pip install -r requirements.txt
+        python setup.py sdist
+      shell: bash
