@@ -14,13 +14,13 @@ on:
         required: false
         type: boolean
         default: false
-    secrets:
-      OIDC_TOKEN:
-        required: false
-      JAVA_DEPLOY_SECRET:
-        required: false
-      PYTHON_DEPLOY_SECRET:
-        required: false
+   # secrets:
+    #  OIDC_TOKEN:
+     #   required: false
+      #JAVA_DEPLOY_SECRET:
+       # required: false
+      #PYTHON_DEPLOY_SECRET:
+      #  required: false
 
 jobs:
   build:
