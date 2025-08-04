@@ -1,0 +1,7 @@
+name: Build Java App
+description: Build Java using Maven or Gradle
+runs:
+  using: "composite"
+  steps:
+    - run: ./java/gradlew build
+      shell: bash
