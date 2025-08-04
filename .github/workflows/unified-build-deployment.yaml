@@ -56,13 +56,13 @@ jobs:
         uses: ./deploy/deploy-java
         with:
           env: ${{ inputs.env }}
-        secrets:
-          deploy_token: ${{ secrets.JAVA_DEPLOY_SECRET }}
+        #secrets:
+         # deploy_token: ${{ secrets.JAVA_DEPLOY_SECRET }}
 
       - name: Deploy Python
         if: ${{ inputs.language == 'python' }}
         uses: ./deploy/deploy-python
         with:
           env: ${{ inputs.env }}
-        secrets:
-          deploy_token: ${{ secrets.PYTHON_DEPLOY_SECRET }}
+        #secrets:
+         # deploy_token: ${{ secrets.PYTHON_DEPLOY_SECRET }}
