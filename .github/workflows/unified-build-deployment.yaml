@@ -1,0 +1,68 @@
+# enterprise-cicd-pipeline/.github/workflows/unified-build-deployment.yaml
+name: Unified Build and Deploy
+
+on:
+  workflow_call:
+    inputs:
+      language:
+        required: true
+        type: string
+      env:
+        required: true
+        type: string
+      upload_artifact:
+        required: false
+        type: boolean
+        default: false
+    secrets:
+      OIDC_TOKEN:
+        required: false
+      JAVA_DEPLOY_SECRET:
+        required: false
+      PYTHON_DEPLOY_SECRET:
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Build Java
+        if: ${{ inputs.language == 'java' }}
+        uses: ./build-java
+
+      - name: Build Python
+        if: ${{ inputs.language == 'python' }}
+        uses: ./build-python
+
+      - name: Upload Artifact
+        if: ${{ inputs.upload_artifact }}
+        uses: ./upload-artifact
+        with:
+          environment: ${{ inputs.env }}
+          language: ${{ inputs.language }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.env }}
+      url: https://your-${{ inputs.env }}-app.example.com  # Optional
+    steps:
+      - name: Deploy Java
+        if: ${{ inputs.language == 'java' }}
+        uses: ./deploy/deploy-java
+        with:
+          env: ${{ inputs.env }}
+        secrets:
+          deploy_token: ${{ secrets.JAVA_DEPLOY_SECRET }}
+
+      - name: Deploy Python
+        if: ${{ inputs.language == 'python' }}
+        uses: ./deploy/deploy-python
+        with:
+          env: ${{ inputs.env }}
+        secrets:
+          deploy_token: ${{ secrets.PYTHON_DEPLOY_SECRET }}
