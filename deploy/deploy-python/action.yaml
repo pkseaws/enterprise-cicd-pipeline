@@ -3,11 +3,11 @@ description: Deploy Python app
 inputs:
   env:
     required: true
-secrets:
-  deploy_token:
-    required: true
+#secrets:
+ # deploy_token:
+  #  required: true
 runs:
   using: "composite"
   steps:
-    - run: echo "Deploying Python app to ${{ inputs.env }} with token ${{ secrets.deploy_token }}"
+    - run: echo "Deploying Python app to ${{ inputs.env }}"
       shell: bash
