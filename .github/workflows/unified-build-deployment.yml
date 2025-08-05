@@ -25,7 +25,7 @@ jobs:
 
       - name: Build Java
         if: ${{ inputs.language == 'java' }}
-        uses: ./build-java
+        uses: ./.github/actions/build-java
 
       - name: Build Python
         if: ${{ inputs.language == 'python' }}
