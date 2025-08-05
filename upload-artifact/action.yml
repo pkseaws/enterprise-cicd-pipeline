@@ -2,8 +2,10 @@ name: Upload Build Artifact
 description: Uploads artifact with metadata
 inputs:
   environment:
+    description: "Envirment requirement"
     required: true
   language:
+    description: "Programing language name"
     required: true
 runs:
   using: "composite"

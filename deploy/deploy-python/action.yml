@@ -2,6 +2,7 @@ name: Deploy Python
 description: Deploy Python app
 inputs:
   env:
+    description: "Envirment required"
     required: true
 #secrets:
  # deploy_token:

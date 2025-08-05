@@ -2,10 +2,9 @@ name: Deploy Java
 description: Deploy Java app
 inputs:
   env:
+    description: "Envirment required"
     required: true
-#secrets:
- # deploy_token:
-  #  required: true
+
 runs:
   using: "composite"
   steps:
