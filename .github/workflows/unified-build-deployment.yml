@@ -63,7 +63,7 @@ jobs:
 
       - name: Deploy Python
         if: ${{ matrix.langugages == 'python' }}
-        uses: pkseaws/enterprise-cicd-pipeline/deploy/deploy/deploy-python
+        uses: pkseaws/enterprise-cicd-pipeline/deploy/deploy-python@main
         with:
           env: ${{ inputs.env }}
         #secrets:
