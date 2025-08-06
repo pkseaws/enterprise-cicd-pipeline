@@ -23,18 +23,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        langugage: ${{ fromJson(inputs.language) }}
+        langugages: ${{ fromJson(inputs.language) }}
     steps:
       - name: Checkout Source
         uses: actions/checkout@v4
 
       - name: Build Java
-        if: ${{ inputs.language == 'java' }}
+        if: ${{ matrix.langugages == 'java' }}
         uses: pkseaws/enterprise-cicd-pipeline/build-java@main
 
       - name: Build Python
-        if: ${{ inputs.language == 'python' }}
-        uses: ./build-python
+        if: ${{ matrix.langugages == 'python' }}
+        uses: pkseaws/enterprise-cicd-pipeline/build-python@main
 
       - name: Upload Artifact
         if: ${{ inputs.upload_artifact }}
@@ -46,12 +46,15 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        langugages: ${{ fromJson(inputs.language) }}
     environment:
       name: ${{ inputs.env }}
       
     steps:
       - name: Deploy Java
-        if: ${{ inputs.language == 'java' }}
+        if: ${{ matrix.langugages == 'java' }}
         uses: pkseaws/enterprise-cicd-pipeline/deploy/deploy-java@main
         with:
           env: ${{ inputs.env }}
@@ -59,8 +62,8 @@ jobs:
          # deploy_token: ${{ secrets.JAVA_DEPLOY_SECRET }}
 
       - name: Deploy Python
-        if: ${{ inputs.language == 'python' }}
-        uses: ./deploy/deploy-python
+        if: ${{ matrix.langugages == 'python' }}
+        uses: pkseaws/enterprise-cicd-pipeline/deploy/deploy/deploy-python
         with:
           env: ${{ inputs.env }}
         #secrets:
