@@ -7,9 +7,11 @@ on:
       language:
         required: true
         type: string
+        default: java
       env:
         required: true
         type: string
+        default: dev
       upload_artifact:
         required: false
         type: boolean
