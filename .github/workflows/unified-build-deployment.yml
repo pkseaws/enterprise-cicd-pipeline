@@ -49,7 +49,7 @@ jobs:
     steps:
       - name: Deploy Java
         if: ${{ inputs.language == 'java' }}
-        uses: ./deploy/deploy-java
+        uses: pkseaws/enterprise-cicd-pipeline/deploy/deploy-java
         with:
           env: ${{ inputs.env }}
         #secrets:
