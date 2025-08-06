@@ -5,11 +5,11 @@ on:
   workflow_call:
     inputs:
       language:
-        required: true
+        required: false
         type: string
         default: java
       env:
-        required: true
+        required: false
         type: string
         default: dev
       upload_artifact:
