@@ -76,7 +76,7 @@ jobs:
         langugages: ${{ fromJson(inputs.language) }}
     steps:
       - name: Upload Artifact
-        if: ${{ inputs.upload_artifact }}
+        #if: ${{ inputs.upload_artifact == true }}
         uses: pkseaws/enterprise-cicd-pipeline/upload-artifact@main
         with:
           language: ${{ matrix.langugages }}
