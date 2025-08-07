@@ -36,12 +36,12 @@ jobs:
         if: ${{ matrix.langugages == 'python' }}
         uses: pkseaws/enterprise-cicd-pipeline/build-python@main
 
-      - name: Upload Artifact
-        if: ${{ inputs.upload_artifact }}
-        uses: ./upload-artifact
-        with:
-          environment: ${{ inputs.env }}
-          language: ${{ inputs.language }}
+      # - name: Upload Artifact
+      #   if: ${{ inputs.upload_artifact }}
+      #   uses: ./upload-artifact
+      #   with:
+      #     environment: ${{ inputs.env }}
+      #     language: ${{ inputs.language }}
 
   deploy:
     needs: build
@@ -58,8 +58,8 @@ jobs:
         uses: pkseaws/enterprise-cicd-pipeline/deploy/deploy-java@main
         with:
           env: ${{ inputs.env }}
-        #secrets:
-         # deploy_token: ${{ secrets.JAVA_DEPLOY_SECRET }}
+        # secrets:
+        # deploy_token: ${{ secrets.JAVA_DEPLOY_SECRET }}
 
       - name: Deploy Python
         if: ${{ matrix.langugages == 'python' }}
@@ -68,16 +68,16 @@ jobs:
           env: ${{ inputs.env }}
         #secrets:
          # deploy_token: ${{ secrets.PYTHON_DEPLOY_SECRET }}
-  UploadArtifact:
-    needs: deploy
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        langugages: ${{ fromJson(inputs.language) }}
-    steps:
-      - name: Upload Artifact
-        #if: ${{ inputs.upload_artifact == true }}
-        uses: pkseaws/enterprise-cicd-pipeline/upload-artifact@main
-        with:
-          language: ${{ matrix.langugages }}
-          env: ${{ inputs.env }}  
+  # UploadArtifact:
+  #   needs: deploy
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       langugages: ${{ fromJson(inputs.language) }}
+  #   steps:
+  #     - name: Upload Artifact
+  #       #if: ${{ inputs.upload_artifact == true }}
+  #       uses: pkseaws/enterprise-cicd-pipeline/upload-artifact@main
+  #       with:
+  #         language: ${{ matrix.langugages }}
+  #         env: ${{ inputs.env }}  
