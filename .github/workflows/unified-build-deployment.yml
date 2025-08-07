@@ -71,13 +71,13 @@ jobs:
   UploadArtifact:
     needs: deploy
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        langugages: ${{ fromJson(inputs.language) }}
+    # strategy:
+    #   matrix:
+    #     langugages: ${{ fromJson(inputs.language) }}
     steps:
       - name: Upload Artifact
         #if: ${{ inputs.upload_artifact }}
-        uses: pkseaws/enterprise-cicd-pipeline/upload-artifact@main
+        uses: pkseaws/enterprise-cicd-pipeline/upload-artifact/java@main
         with:
-          language: ${{ matrix.langugages }}
+          language: java
           env: ${{ inputs.env }}  

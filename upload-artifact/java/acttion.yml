@@ -1,0 +1,22 @@
+name: Upload Build Artifact
+description: Uploads artifact with metadata
+inputs:
+  environment:
+    description: "Envirment requirement"
+    required: true
+  language:
+    description: "Programing language name"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - run: |
+        VERSION=$(date +%Y%m%d%H%M)
+        echo "version=$VERSION" >> $GITHUB_EN
+        #tar -czf $ARTIFACT_NAME .
+        echo "Uploading $ARTIFACT_NAME"
+      shell: bash
+    - uses: actions/upload-artifact@v3
+      with:
+        name: java-app-${{ env.version }}
+        path: ${{ github.workspace }}/*.jar
