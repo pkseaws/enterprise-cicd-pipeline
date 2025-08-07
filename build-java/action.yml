@@ -17,9 +17,10 @@ runs:
         if [ -f java/pom.xml ]; then
           cd java
           mvn clean install
+          mvn -B package --file pom.xml
+          mkdir staging && cp target/*jar staging
         else
           echo "No build file found (pom.xml or build.gradle)"
         fi
-        mvn -B package --file pom.xml
-        mkdir staging && cp target/*jar staging
+        
       shell: bash
