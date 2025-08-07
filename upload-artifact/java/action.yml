@@ -12,7 +12,7 @@ runs:
   steps:
     - run: |
         VERSION=$(date +%Y%m%d%H%M)
-        echo "version=$VERSION" >> $GITHUB_EN
+        echo "version=$VERSION" >> $GITHUB_ENV
         #tar -czf $ARTIFACT_NAME .
         echo "Uploading $ARTIFACT_NAME"
       shell: bash
