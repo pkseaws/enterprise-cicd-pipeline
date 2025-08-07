@@ -69,6 +69,7 @@ jobs:
         #secrets:
          # deploy_token: ${{ secrets.PYTHON_DEPLOY_SECRET }}
   UploadArtifact:
+    needs: deploy
     runs-on: ubuntu-latest
     strategy:
       matrix:
