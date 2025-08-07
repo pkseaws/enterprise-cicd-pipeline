@@ -20,4 +20,4 @@ runs:
       with:
         name: java-app-${{ env.version }}
         #path: ${{ github.workspace }}/*.jar
-        path: upload-artifact/*.jar
+        path: upload-artifact/
