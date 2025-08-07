@@ -16,7 +16,7 @@ runs:
         #tar -czf $ARTIFACT_NAME .
         echo "Uploading $ARTIFACT_NAME"
       shell: bash
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: java-app-${{ env.version }}
         path: ${{ github.workspace }}/*.jar
