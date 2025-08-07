@@ -3,10 +3,10 @@ description: Uploads artifact with metadata
 inputs:
   environment:
     description: "Envirment requirement"
-    required: true
+    required: false
   language:
     description: "Programing language name"
-    required: true
+    required: false
 runs:
   using: "composite"
   steps:
@@ -19,4 +19,5 @@ runs:
     - uses: actions/upload-artifact@v4
       with:
         name: java-app-${{ env.version }}
-        path: ${{ github.workspace }}/*.jar
+        #path: ${{ github.workspace }}/*.jar
+        path: upload-artifact/*.jar
