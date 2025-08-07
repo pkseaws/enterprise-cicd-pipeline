@@ -68,3 +68,15 @@ jobs:
           env: ${{ inputs.env }}
         #secrets:
          # deploy_token: ${{ secrets.PYTHON_DEPLOY_SECRET }}
+  UploadArtifact:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        langugages: ${{ fromJson(inputs.language) }}
+    steps:
+      - name: Upload Artifact
+        if: ${{ inputs.upload_artifact }}
+        uses: pkseaws/enterprise-cicd-pipeline/upload-artifact@main
+        with:
+          language: ${{ matrix.langugages }}
+          env: ${{ inputs.env }}  
